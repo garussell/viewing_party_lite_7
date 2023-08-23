@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "welcome#index"
 
-  resources :welcome
+  resources :welcome, only: [:index]
+  
   resources :users do
     resources :discover, only: [:index]
+    resources :movies, only: [:index]
   end
 end

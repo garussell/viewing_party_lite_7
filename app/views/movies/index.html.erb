@@ -1,0 +1,50 @@
+<head>
+  <title>Movies</title>
+</head>
+
+
+<h1>Movies</h1>
+
+<%= render "shared/welcome_link" %>
+
+<% if params[:commit] == "Find Movies" %>
+  <div class="search-movies">
+    <h2>Movie Results for: <%= params[:title] %></h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Vote Average</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @facade.search_movies.each do |movie| %>
+          <tr>
+            <td><%= movie.name %></td>
+            <td><%= movie.vote_average %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div class="discover-movies">
+    <h2>Top Movies</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Vote Average</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @facade.top_movies.each do |movie| %>
+          <tr>
+            <td><%= movie.name %></td>
+            <td><%= movie.vote_average %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div> 
+<% end %>

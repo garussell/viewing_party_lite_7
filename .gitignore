@@ -34,3 +34,5 @@
 
 
 /config/application.yml
+spec/fixtures/vcr_cassettes/top_rated_movies.yml
+spec/fixtures/vcr_cassettes/movie_search.yml

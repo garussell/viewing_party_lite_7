@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_23_000336) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_23_173700) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,8 +23,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_23_000336) do
     t.string "top_10"
     t.integer "total_reviews"
     t.string "review_authors"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_movies_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -32,6 +34,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_23_000336) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users_viewing_parties", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "viewing_party_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_users_viewing_parties_on_user_id"
+    t.index ["viewing_party_id"], name: "index_users_viewing_parties_on_viewing_party_id"
   end
 
   create_table "viewing_parties", force: :cascade do |t|
@@ -42,8 +53,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_23_000336) do
     t.datetime "viewing_time", precision: nil
     t.date "viewing_date"
     t.string "users"
+    t.bigint "movie_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["movie_id"], name: "index_viewing_parties_on_movie_id"
   end
 
 end
