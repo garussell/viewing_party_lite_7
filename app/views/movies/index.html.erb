@@ -18,9 +18,9 @@
         </tr>
       </thead>
       <tbody>
-        <% @facade.search_movies.each do |movie| %>
+        <% @facade.search_movies.take(20).each do |movie| %>
           <tr>
-            <td><%= movie.name %></td>
+            <td><%= link_to movie.name, user_movie_path(@user, movie), method: :get %></td>
             <td><%= movie.vote_average %></td>
           </tr>
         <% end %>
@@ -38,9 +38,9 @@
         </tr>
       </thead>
       <tbody>
-        <% @facade.top_movies.each do |movie| %>
+        <% @facade.top_movies.take(20).each do |movie| %>
           <tr>
-            <td><%= movie.name %></td>
+            <td><%= link_to movie.name, user_movie_path(@user, movie), method: :get %></td>
             <td><%= movie.vote_average %></td>
           </tr>
         <% end %>
