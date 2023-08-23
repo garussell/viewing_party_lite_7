@@ -19,15 +19,18 @@ RSpec.describe "users discover path" do
         VCR.use_cassette("top_rated_movies") do
           click_on "Find Top Rated Movies"
           expect(page).to have_current_path(user_movies_path(@user_1))
+          expect(page).to have_content("Spider-Man: Across the Spider-Verse")
+          expect(page).to have_link("Spider-Man: Across the Spider-Verse")
         end
       end
-
+      
       it "they should be taken to the movies results page" do
         VCR.use_cassette("movie_search") do
           fill_in :title, with: "Star Wars"
           click_on "Find Movies"
           expect(page).to have_content("Star Wars: The Clone Wars")
           expect(page).to have_content("The Star Wars Holiday Special")
+          expect(page).to have_link("Star Wars: The Clone Wars")
         end
       end
     end
