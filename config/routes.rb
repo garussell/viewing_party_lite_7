@@ -8,6 +8,6 @@ Rails.application.routes.draw do
   
   resources :users do
     resources :discover, only: [:index]
-    resources :movies, only: [:index]
+    resources :movies, only: [:index, :show]
   end
 end
