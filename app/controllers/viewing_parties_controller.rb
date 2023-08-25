@@ -25,7 +25,7 @@ class ViewingPartiesController < ApplicationController
       
       @viewing_party = @user.viewing_parties.build(viewing_party_params)
       @viewing_party.users << User.find(params[:viewing_party][:user_ids])
-      
+
       if @viewing_party.save
         redirect_to user_path(@user, id: params[:id])
       else
@@ -34,7 +34,7 @@ class ViewingPartiesController < ApplicationController
       end
     else
       flash[:error] = "Duration cannot be less than runtime - #{movie_runtime} minutes"
-      redirect_to new_user_viewing_party_path(@user, id: params[:id])
+      redirect_back(fallback_location: root_path)
     end
   end
   
