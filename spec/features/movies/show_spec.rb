@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "users movies show page" do
   before do
     @user_1 = User.create!(name: "Ringo", email: "ringo@gmail.com")
-    @movie_1 = Movie.create!(
+    @movie = Movie.create!(
       title: "Batman", 
       vote_average: 8, 
       runtime: 90, 
@@ -25,11 +25,11 @@ RSpec.describe "users movies show page" do
       review_authors: "trollsalot",
       user_id: @user_1.id)
 
-      visit user_movie_path(@user_1, @movie_1)
+      visit user_movie_path(@user_1, @movie)
   end
     
   describe "as a user", :vcr do
-    describe "when I visit a movie's detail page (/users/:user_id/movies/:movie_id) - where user_id is valid" do
+    describe "when I visit a movie's detail page (/users/:user_id/movies/:movie_id) - where user_id is valid", vcr: { record: :new_episodes } do
       it "I should see a button to create a viewing party and a button to return to the Discover Page" do
         expect(page).to have_button("Discover Page")
         expect(page).to have_link("Create Viewing Party")

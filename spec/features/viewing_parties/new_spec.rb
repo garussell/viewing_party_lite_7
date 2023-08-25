@@ -20,7 +20,7 @@ RSpec.describe "new viewing party page" do
 
   describe "as a user" do
     describe "when I visit the new viewing party page" do
-      it "I can fill out a form to create a new viewing party and the form includes movie title, duration, data, start_time, and check_boxes to invite other users" do
+      it "I can fill out a form to create a new viewing party and the form includes movie title, duration, data, start_time, and check_boxes to invite other users", vcr: { record: :new_episodes }  do
         # expect(page).to have_content(@movie.title)
         # expect(page).to have_field(:duration)
         # expect(page).to have_field(:date)
