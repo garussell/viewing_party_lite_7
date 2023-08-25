@@ -22,7 +22,6 @@ class ViewingPartiesController < ApplicationController
   }
   
     if params[:viewing_party][:duration_minutes].to_i >= movie_runtime
-      
       @viewing_party = @user.viewing_parties.build(viewing_party_params)
       @viewing_party.users << User.find(params[:viewing_party][:user_ids])
 
