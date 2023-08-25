@@ -26,7 +26,7 @@ RSpec.describe "root path" do
       end
 
       it "links back to the landing page (at the top of all pages)" do
-        expect(page).to have_link("Home")
+        expect(page).to have_button("Home")
 
         click_on "Home" 
 
