@@ -30,7 +30,7 @@ class ViewingPartiesController < ApplicationController
         redirect_to user_path(@user, id: params[:id])
       else
         flash[:error] = "Failed to create a new viewing party."
-        redirect_to new_user_viewing_party_path(@user, id: params[:id])
+        redirect_back(fallback_location: root_path)
       end
     else
       flash[:error] = "Duration cannot be less than runtime - #{movie_runtime} minutes"
