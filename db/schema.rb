@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_25_194417) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_25_223413) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,7 +48,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_25_194417) do
   create_table "viewing_parties", force: :cascade do |t|
     t.string "host"
     t.string "movie"
-    t.time "duration"
+    t.integer "duration"
     t.datetime "viewing_time", precision: nil
     t.date "viewing_date"
     t.string "users"
