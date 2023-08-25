@@ -1,34 +1,34 @@
-<head>
-  <%= render "shared/welcome_link" %>
-  <h1>Viewing Party</h1>
-</head>
+<h3><%= @details.title %> Viewing Party</h3>
 
-<body>
-  <h3>Viewing Party Details</h3>
-  <p>Movie Title: <%= @movie[:title] %></p>
-
-  <%= form_with model: @viewing_party, url: user_viewing_parties_path(@user), local: true do |form| %>
-    <%= hidden_field_tag :movie_data, @movie %>
-    <%= hidden_field_tag :runtime, @movie[:runtime] %>
-
-    <%= form.label :duration %>
-    <%= form.number_field :duration_minutes %>
-
-    <%= form.label :date %>
-    <%= form.date_field :date %>
-
-    <%= form.label :start_time %>
-    <%= form.time_field :start_time %>
-    
-    <%= form.label :users, "Invite Other Users" %>
-    <% User.all.each do |user| %>
-      <ul>
-        <%= form.check_box :user_ids, { multiple: true }, user.id %>
-        <%= user.name %>
-      </ul>
+<% if @viewing_party.id %>
+<b> Select the box next to their name and submit via Invite to notify those users of your party! </b>
+  <%= form_with url: "/users/#{@user.id}/movies/#{@details.id}/viewing-parties/#{@viewing_party.id}/user-viewing-parties", local: true do |f| %>  
+    <% @users.each do |user| %>
+      <% unless @user.id == user.id %>
+        <div id="<%= user.id %>">
+          <%= check_box_tag 'user_ids[]', user.id %>
+          <%= user.name %>
+        </div>
+      <% end %>
     <% end %>
-      
-    <%= form.submit %>
+  <%= submit_tag 'Invite' %>
   <% end %>
-    
-</body>
+
+<% else %>
+
+  <%= form_with url: "/users/#{@user.id}/movies/#{@details.id}/viewing-parties", local: true do |f| %>  
+    <p><%= f.label :duration, 'Duration in minutes:' %></p>
+    <p><%=  f.number_field :duration, value: @details.runtime %></p> 
+
+    <p><%= f.label :event_date, 'Date for event:' %></p>
+    <p><%=  f.date_field :event_date%></p>
+
+    <p><%= f.label :start_time, 'Start time:' %></p>
+    <p><%=  f.time_field :start_time%></p>
+
+    <p><%= f.label :name, 'Name for event:' %></p>
+    <p><%=  f.text_field :name%></p>
+
+    <p><%= f.submit "Create" %></p>
+  <% end %>
+<% end %>
