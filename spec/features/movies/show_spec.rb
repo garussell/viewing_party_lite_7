@@ -42,7 +42,7 @@ RSpec.describe "users movies show page", type: :feature do
         expect(page).to have_content(@movie.title)
         expect(page).to have_content(@movie.vote_average)
         expect(page).to have_content(@movie.runtime)
-        expect(page).to have_content(@movie.genre.join(', '))
+        expect(page).to have_content(@movie.genre)
         expect(page).to have_content(@movie.overview)
         expect(page).to have_content(@movie.total_reviews)
         expect(page).to have_content(@movie.review_authors)
