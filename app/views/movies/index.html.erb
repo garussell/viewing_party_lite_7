@@ -3,13 +3,13 @@
 
 <% if @facade.discovery? %>
   <div class="discover-movies">
-    <% @facade.get_discover_movies.each do |movie| %>
+    <% @facade.get_discover_movies.take(20).each do |movie| %>
       <p><%= link_to movie.title, user_movie_path(@user, movie, movie_data: movie.to_json), method: :get %>   <%= "Vote Average: #{movie.vote_average}" %></p>
     <% end %>
   </div>
 <% else %>
   <div class="search-movies">
-    <% @facade.get_search_movies.each do |movie| %>
+    <% @facade.get_search_movies.take(20).each do |movie| %>
       <p><%= link_to movie.title, user_movie_path(@user, movie, movie_data: movie.to_json), method: :get%>   <%= "Vote Average: #{movie.vote_average}" %></p>
     <% end %>
   </div>
