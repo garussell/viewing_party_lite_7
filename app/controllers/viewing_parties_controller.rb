@@ -10,12 +10,13 @@ class ViewingPartiesController < ApplicationController
     user_id = params[:user_id]
     movie_runtime = params[:runtime].to_i
     movie_title = params[:movie_title]
+    movie_id = params[:movie_id]
     user_ids = params[:viewing_party][:user_ids]
     invited_users = User.where(id: user_ids) 
       
     viewing_party_params = {
       host: user_id,
-      movie: movie_title,
+      movie: movie_id,
       duration: params[:viewing_party][:duration_minutes],
       viewing_time: params[:viewing_party][:start_time],
       viewing_date: params[:viewing_party][:date],

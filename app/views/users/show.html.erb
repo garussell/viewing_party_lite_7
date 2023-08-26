@@ -8,4 +8,19 @@
   <%= button_to "Discover Movies", user_discover_index_path(@user), class: "button", method: :get %>
 </body>
 <br>
-<h3><%= "#{@user.name}'s Viewing Parties" %></h3>
+
+<h2>Viewing Parties I've Been Invited To</h2>
+<% @invited_to_viewing_parties.each do |viewing_party| %>
+  <p><%= viewing_party.movie %></p>
+  <p>Date and Time: <%= viewing_party.viewing_date.strftime('%Y-%m-%d') %> <%= viewing_party.viewing_time.strftime('%H:%M') %></p>
+  <p>Hosted by: <%= viewing_party.host %></p>
+  <p>Invited: <%= viewing_party.users.map { |user| user == @user ? "<strong>#{user.name}</strong>" : user.name }.join(', ') %></p>
+<% end %>
+
+<h2>Viewing Parties I've Created</h2>
+<% @created_viewing_parties.each do |viewing_party| %>
+  <p><%= viewing_party.movie %></p>
+  <p>Date and Time: <%= viewing_party.viewing_date %> <%= viewing_party.viewing_time %></p>
+  <p>Hosted by: You</p>
+  <p>Invited: <%= viewing_party.users.map(&:name).join(', ') %></p>
+<% end %>
